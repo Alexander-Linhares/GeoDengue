@@ -1,12 +1,11 @@
 import os
-import pandas as pd
-import flet as ft 
 
 #Essa função encontra o diretório raiz busca o diretório informado e procura os arquivos com sufixo informados
 #dirname: retorna o nome do diretório do caminho especificado
 #abspath: retorna o caminho absoluto de determinado subpath 
 #join: concatena de forma inteligente dois caminhos
 #__file__: possui o caminho do arquivo em execução
+
 def get_file_path(folder_name: str, file_sufix: str) -> list[str]:
     root = os.path.dirname(os.path.abspath(__file__))
 
@@ -26,34 +25,3 @@ def get_file_path(folder_name: str, file_sufix: str) -> list[str]:
     ]
 
     return excel_files
-
-
-def main(page: ft.Page):
-    page.title = "File picker"
-
-    def pick_files_result(e: ft.FilePickerResultEvent):
-        print(e)
-    
-    pick_files_dialog = ft.FilePicker(on_result=pick_files_result)
-
-    page.overlay.append(pick_files_dialog)
-
-    page.add(
-        ft.Row(
-            controls=[
-                ft.ElevatedButton(
-                    "Selecionar arquivo",
-                    icon=ft.Icons.UPLOAD_FILE,
-                    on_click=lambda _: pick_files_dialog.pick_files(
-                        dialog_title="Selecione uma planilha do excel da dengue ",
-                        allowed_extensions=["xlsx"],
-                        allow_multiple=True
-                    )
-                )
-            ]
-        )
-    )
-
-if __name__ == "__main__":
-    print("Olá mundo!")
-    ft.app(target=main)
