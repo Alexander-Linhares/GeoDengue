@@ -2,3 +2,4 @@ database
 dev
 .env
 .env.tokens
+__pycache__
