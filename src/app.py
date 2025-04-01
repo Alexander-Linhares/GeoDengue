@@ -1,28 +1,34 @@
-import flet as ft
+import os
+import pandas as pd
+import flet as ft 
+
 
 def main(page: ft.Page):
-    page.title = "Flet counter example"
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    page.title = "File picker"
 
-    txt_number = ft.TextField(value="0", text_align=ft.TextAlign.RIGHT, width=100)
+    def pick_files_result(e: ft.FilePickerResultEvent):
+        print(e)
+    
+    pick_files_dialog = ft.FilePicker(on_result=pick_files_result)
 
-    def minus_click(e):
-        txt_number.value = str(int(txt_number.value) - 1)
-        page.update()
-
-    def plus_click(e):
-        txt_number.value = str(int(txt_number.value) + 1)
-        page.update()
+    page.overlay.append(pick_files_dialog)
 
     page.add(
         ft.Row(
-            [
-                ft.IconButton(ft.Icons.REMOVE, on_click=minus_click),
-                txt_number,
-                ft.IconButton(ft.Icons.ADD, on_click=plus_click),
-            ],
-            alignment=ft.MainAxisAlignment.CENTER,
+            controls=[
+                ft.ElevatedButton(
+                    "Selecionar arquivo",
+                    icon=ft.Icons.UPLOAD_FILE,
+                    on_click=lambda _: pick_files_dialog.pick_files(
+                        dialog_title="Selecione uma planilha do excel da dengue ",
+                        allowed_extensions=["xlsx"],
+                        allow_multiple=True
+                    )
+                )
+            ]
         )
     )
 
-ft.app(main)
+if __name__ == "__main__":
+    print("Olá mundo!")
+    ft.app(target=main)
