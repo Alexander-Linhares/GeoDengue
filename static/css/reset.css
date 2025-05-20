@@ -1,0 +1,31 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Removendo estilos padrão de listas */
+ul, ol {
+    list-style: none;
+}
+
+/* Definindo uma tipografia padrão */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Removendo bordas extras de imagens */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Reset de elementos de formulário */
+button, input, textarea {
+    border: none;
+    outline: none;
+    background: none;
+}
