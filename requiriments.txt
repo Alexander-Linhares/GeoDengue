@@ -2,6 +2,13 @@ flask
 flask_sqlalchemy
 flask_socketio
 flask_wtf
+sqlalchemy
 pandas
 numpy
 folium
+eventlet
+psycopg2
+openpyxl
+geopy
+geobr
+geopandas

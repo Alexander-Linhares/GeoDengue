@@ -8,16 +8,103 @@
     </head>
     <body>
         <header>
-            <h1>Mapas</h1>
+            <div class="logo_container">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo">
+            </div>
+            <nav class="top_nav">
+                <ul class="nav_list">
+                    <li class="nav_item"><a href="#">Inicio</a></li>
+                    <li class="nav_item"><a href="#">Mapa</a></li>
+                    <li class="nav_item"><a href="#">Estatísticas</a></li>
+                    <li class="nav_item"><a href="#">Relatórios</a></li>
+                    <li class="nav_item"><a href="#">Sobre</a></li>
+                </ul>
+            </nav>
         </header>
         <main>
-            <section class="map-content">
-                <p>The page maps going here</p>
-                {{ iframe|safe}}
-            </section>
+            <div id="sidebar_menu">
+                <div id="menu_icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
+                        <path d="M4.5 16H28.5M4.5 8H28.5M4.5 24H28.5" stroke="#1E1E1E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div id="settings_icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+                    <g clip-path="url(#clip0_107_273)">
+                        <path d="M4.5 21V14M4.5 10V3M12.5 21V12M12.5 8V3M20.5 21V16M20.5 12V3M1.5 14H7.5M9.5 8H15.5M17.5 16H23.5" stroke="#1E1E1E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_107_273">
+                        <rect width="24" height="24" fill="white" transform="translate(0.5)"/>
+                        </clipPath>
+                    </defs>
+                    </svg>
+                </div>
+            </div>
+            <div id="content">
+                <section class="map_content">
+                    <p>The page maps going here</p>
+                    {{ iframe|safe }}
+                </section>
+                <div class="horizontal_carousel">
+                    <button id="prev_btn"><</button>
+                    <nav>
+                        <ul>
+                            {% if items != None %}
+                                {% for item in items %}
+                                    <button>{{item}}</button>
+                                {% endfor %}
+                            {% endif%}
+                        </ul>
+                    </nav>
+                    <button id="next_btn">></button>
+                </div>
+                
+                <section class="file_upload">
+                
+                    <div class="selection_previews">
+                        <div class="file_preview">
+                            <p>Selected files will appear here</p>
+                        </div>
+                    </div>
+                    <form action="{{url_for('upload_files.upload')}}" method="POST" enctype="multipart/form-data">
+                        <fieldset>
+                            <input type="file" name="file_input" id="fileInput" accept=".xlsx, .csv" multiple name="files">
+                            <input type="submit" name="send_file_button" value="Upload Files" id="uploadButton">
+                        </fieldset>
+                    </form>
+                    <script text="javascript">
+                        document.getElementById('fileInput').addEventListener('change', (event) => {
+                            console.log('Files selected:', event.target.files);
+                            
+                            const filePreviews = document.querySelector('.file_preview');
+                            filePreviews.innerHTML = ''; // Clear previous previews
+
+                            for (const file of event.target.files) {
+                                const fileDiv = document.createElement('div');
+                                const fileType = file.name.match('xlsx|csv');
+
+                                const img = document.createElement('img');
+                                img.src = `../static/images/icons/${fileType}.png`; // Placeholder for file icon
+                                img.alt = 'File Icon';
+                                
+                                fileDiv.classList.add('file_item');
+                                //fileDiv.innerHTML = `<p>${file.name}</p>`;
+                                fileDiv.prepend(img); // Add icon before the file name
+
+                                filePreviews.appendChild(fileDiv);
+                            }
+                        });
+                    </script>
+                </section>
+            </div>
         </main>
+
+
+
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
         <script src="{{ url_for('static', filename='javascript/client/socket_client.js') }}"></script>
-        <script src="{{ url_for('static', filename='javascript/client/canvas_config.js') }}" defer></script>
+        <script src="{{ url_for('static', filename='javascript/client/events/switch_view_button.js')}}"></script>
     </body>
 </html>

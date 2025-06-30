@@ -1,6 +1,8 @@
+import secrets
+import os
 from urllib.parse import quote
 
-SECRET_KEY = 'keep_secret'
+SECRET_KEY = secrets.token_hex(16)
 SQLALCHEMY_DATABASE_URI = '{SGBD}://{user}:{password}@{host}:{port}/{database}'.format(
         SGBD='postgresql',
         user='postgres',
@@ -11,3 +13,12 @@ SQLALCHEMY_DATABASE_URI = '{SGBD}://{user}:{password}@{host}:{port}/{database}'.
     )
 
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+UPLOAD_PATH_FOLDER = os.path.normpath(os.path.join(BASE_DIR, '../static/uploads'))
+
+
+if __name__ == "__main__":
+    print(f"SECRET_KEY: {SECRET_KEY}")
+    print(f"SQLALCHEMY_DATABASE_URI: {SQLALCHEMY_DATABASE_URI}")
+    print(f"UPLOAD_PATH_FOLDER: {UPLOAD_PATH_FOLDER}")
+    print(f"SQLALCHEMY_TRACK_MODIFICATIONS: {SQLALCHEMY_TRACK_MODIFICATIONS}")

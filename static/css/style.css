@@ -1,7 +1,62 @@
+@import url(reset.css);
+@import url(header.css);
+@import url(upload_section.css);
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 :root {
-    --primary-color: #3498db;
-    --secondary-color: #2ecc71;
+    --primary-color: #055B3A;
+    --p-variant-color: #00A86B;
+    --secondary-color: #FF5F09;
+    --terciary-color: #5700C2;
+
     --background-color: #ecf0f1;
+    --background-contrast-color: #EEEEEE;
+
     --text-color: #2c3e50;
     --font-family: 'Arial', sans-serif;
+
+    --color: #000;
+
+    --font-family: Inter;
+    --font-size1: 16px;
+    --font-size2: 14px;
+    --font-size3: 12px;
+    --font-style: normal;
+    --font-weight1: 400;
+    --font-weight2: 600;
+    --line-height: normal;
+
+    --button-radius: 8px;
+
+    --button-neutral-color: #dce1e2;
 }
+
+
+.horizontal_carousel {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.horizontal_carousel nav {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    overflow: hidden;
+    justify-content: center;
+    width: 80%;
+}
+
+.horizontal_carousel ul {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    overflow: hidden;
+    justify-content: center;
+    width: 100%;
+}
+
+

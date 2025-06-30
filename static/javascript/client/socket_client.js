@@ -1,4 +1,4 @@
-var socket = io("http://localhost:5000/");
+var socket = io("http://127.0.0.1:8080/");
 
 socket.on('connect', function() {
     console.log('Conectado ao servidor!')
